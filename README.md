@@ -5,8 +5,8 @@ cuckoo_addons
 
 
 
-This is a script that give additional functionality to Cuckoo with the intergration of: 
-TOR Transparant Proxy for anonymous analysis, iNetsim for simulated internet and NAT for the cowboys.
+This is a script that gives additional functionality to Cuckoo with the integration of: 
+TOR Transparant Proxy for anonymous analysis, iNetsim for simulated internet components and NAT for the cowboys.
 
 To use this script you need to have:
 
@@ -18,6 +18,8 @@ To use this script you need to have:
 * uml-utilities installed to create a TAP/TUN interface
 * ipv4 forwarding enabled
 * route from the TAP interface to you're outgoing interface (e.g. eth0)
+
+Eventually requirements form this list will get remove and being merged in the script.
 
 This script does al the magic for the TOR Transparant Proxy, just fill in the right listning addresses in config.py.
 
