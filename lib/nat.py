@@ -28,6 +28,7 @@ def Nat():
 			time.sleep(1)
 			print "\nFlushing iptables rules..."
 			time.sleep(1)
+			# has to be nuked, sometimes manual removal of the rules goes wrong and you get stuck with poisoned iptables
 			os.system("iptables -t nat -F; iptables -F")
 			print "\nDone."
 			sys.exit()

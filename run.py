@@ -5,12 +5,11 @@
 import os
 import sys
 import argparse
+import config
 from lib import nat
 from lib import tor
-import config
 #from lib import inetsim
 
-#subprocess.call("route add blaat")
 
 
 
