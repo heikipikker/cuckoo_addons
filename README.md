@@ -19,7 +19,7 @@ To use this script you need to have:
 * ipv4 forwarding enabled
 * route from the TAP interface to you're outgoing interface (e.g. eth0)
 
-Eventually requirements form this list will get remove and being merged in the script.
+Eventually requirements from this list will get removed and being merged in the script.
 
 This script does al the magic for the TOR Transparant Proxy, just fill in the right listning addresses in config.py.
 
