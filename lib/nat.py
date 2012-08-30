@@ -16,7 +16,7 @@ def Nat():
 	os.system("iptables -A FORWARD -i %s -o %s -m state --state RELATED,ESTABLISHED -j ACCEPT" % (config.INTERNET_INTERFACE,config.TAP_INTERFACE))
 	os.system("iptables -A FORWARD -i %s -o %s -j ACCEPT" % (config.TAP_INTERFACE,config.INTERNET_INTERFACE))
 	os.system("iptables -t nat -A POSTROUTING -o %s -j MASQUERADE" % (config.INTERNET_INTERFACE))	
-	print "\nDone, NAT running for %s to the internet." % (config.INTERNET_INTERFACE)
+	print "\nDone, NAT running from %s to the internet." % (config.INTERNET_INTERFACE)
 
 	while True:
 		try:
