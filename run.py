@@ -1,5 +1,6 @@
-#!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+#!/usr/bin/python
 
+#derp
 # Install argparse module trough PIP or install manually
 
 import sys
