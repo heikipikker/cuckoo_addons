@@ -23,7 +23,7 @@ def Nat():
 			time.sleep(1)
 			
 		except KeyboardInterrupt:
-			print "\nKilling BIND DNS server..."
+			print "\nStopping BIND DNS server..."
 			os.system("pkill named")
 			time.sleep(1)
 			print "\nFlushing iptables rules..."
