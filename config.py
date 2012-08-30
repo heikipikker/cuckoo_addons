@@ -1,5 +1,6 @@
-#!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+# Config file
 
-CUCKOO_PATH=""
-INETSIM_PATH=""
-TOR_CONFIG_PATH=""
+CUCKOO_PATH="~/src/cuckoo/"
+INETSIM_PATH="/opt/inetsim-1.2.2/"
+TOR_CONFIG_FILE="/etc/tor/torrc"
+TAP_INTERFACE="tap0"
