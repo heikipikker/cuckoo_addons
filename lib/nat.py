@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# Copyright (C) 2012 Serge van Namen <serge@se-cured.org>.
+
+
 import sys
 import os
 import time
@@ -25,8 +29,5 @@ def Nat():
 			print "\nFlushing iptables rules..."
 			time.sleep(1)
 			os.system("iptables -t nat -F; iptables -F")
-#			os.system("iptables -D FORWARD -i %s -o %s -m state --state RELATED,ESTABLISHED -j ACCEPT" % (config.INTERNET_INTERFACE,config.TAP_INTERFACE))
-#			os.system("iptables -D FORWARD -i %s -o %s -j ACCEPT" % (config.TAP_INTERFACE,config.INTERNET_INTERFACE))
-#			os.system("iptables -t nat -D POSTROUTING -o %s -j MASQUERADE" % (config.INTERNET_INTERFACE))	
 			print "\nDone."
 			sys.exit()

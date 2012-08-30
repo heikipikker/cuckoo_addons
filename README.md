@@ -1,5 +1,9 @@
 cuckoo_addons
 =============
+#!/usr/bin/python
+# Copyright (C) 2012 Serge van Namen <serge@se-cured.org>.
+
+
 
 This is a script that give additional functionality to Cuckoo with the intergration of: 
 TOR Transparant Proxy for anonymous analysis, iNetsim for simulated internet and NAT for the cowboys.
