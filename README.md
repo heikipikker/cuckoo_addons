@@ -3,10 +3,11 @@
 cuckoo_addons
 =============
 
-This is a script that gives additional functionality to Cuckoo with the integration of: 
+This package gives additional functionality to Cuckoo with the integration of: 
 TOR Transparant Proxy for anonymous analysis, iNetsim for simulated internet components and NAT for the cowboys.
+It contains two executable parts: prephost.py for preperation of your host and run.py --inetsim/--nat/--tor to run the desired service. 
 
-This script is still in development and is meant for Debian/Ubuntu based distributions. (Yes. Ubuntu and Debian were pronounced in one sentence.)
+This software is still in development and is meant for Debian/Ubuntu based distributions. (Yes. Ubuntu and Debian were pronounced in one sentence.)
 
 To use this script you need to have:
 
@@ -14,7 +15,7 @@ To use this script you need to have:
 
 * A working installation of iNetsim from _SOURCE_, which is included in this script under src/ which will be extracted and configured when running prephost.py -si.
 
-* A working installation of BIND, currently only works with the `named' binary(debian).
+* A working installation of BIND, currently only works with the `named' binary (debian).
 
 * iptables  
 
@@ -27,6 +28,9 @@ To use this script you need to have:
 
 
 WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING PREPHOST.PY
+WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING PREPHOST.PY
+WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING PREPHOST.PY
+if you don't, you'll probably end up with broken network configuration.
 
 
 
@@ -39,7 +43,8 @@ WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING P
 * Statisfy iNetsim depandencies when running ./inetsim from src/inetsimXXX/ with CPAN, currently there isn't a good .deb package.
   Dependancies can be found here if CPAN is not working: http://www.inetsim.org/requirements.html
 
-* edit lib/inetsim.conf to your needs, in most cases you only need to manually change the `dns_default_ip' to your TAP interface.
+* Ddit lib/inetsim.conf to your needs, in most cases you only need to manually change the `dns_default_ip' to your TAP interface.
+  Keep in mind that iNetsim is highly configurable, you can almost change all content that is being presented by the simulated services. 
 
 * Static IP for your network interface inside you're VM (vmnic) that is configured to bridge with the created tapX interface (e.g.: 172.16.0.1 tapX on host, 172.16.0.25/16 on vmnic)
 
