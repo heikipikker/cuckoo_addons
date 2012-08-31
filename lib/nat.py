@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # Copyright (C) 2012 Serge van Namen <serge@se-cured.org>.
 
-
 import sys
 import os
 import time
@@ -20,9 +19,9 @@ def Nat():
 
 	while True:
 		try:
-			time.sleep(1)
-			
-		except KeyboardInterrupt:
+			time.sleep(20000)
+
+		except KeyboardInterrupt: 
 			print "\nStopping BIND DNS server..."
 			os.system("pkill named")
 			time.sleep(1)
