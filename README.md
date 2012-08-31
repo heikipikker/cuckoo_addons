@@ -40,10 +40,10 @@ if you don't, you'll probably end up with broken network configuration.
 
 * Configure the created tapX interface in the VirtualBox VM as a _bridged_ interface
 
-* Statisfy iNetsim depandencies when running ./inetsim from src/inetsimXXX/ with CPAN, currently there isn't a good .deb package.
+* Statisfy iNetsim depandencies when running ./inetsim from src/inetsimXXX/ with CPAN, currently there isn't a good .deb package for newer distributions.
   Dependancies can be found here if CPAN is not working: http://www.inetsim.org/requirements.html
 
-* Ddit lib/inetsim.conf to your needs, in most cases you only need to manually change the `dns_default_ip' to your TAP interface.
+* Edit lib/inetsim.conf to your needs, in most cases you only need to manually change the `dns_default_ip' to your TAP interface.
   Keep in mind that iNetsim is highly configurable, you can almost change all content that is being presented by the simulated services. 
 
 * Static IP for your network interface inside you're VM (vmnic) that is configured to bridge with the created tapX interface (e.g.: 172.16.0.1 tapX on host, 172.16.0.25/16 on vmnic)

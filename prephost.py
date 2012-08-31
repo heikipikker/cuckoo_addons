@@ -23,8 +23,8 @@ args = parser.parse_args()
 
 if args.setupinetsim:
 	# extract inetsim sources, run the inetsim setup script to correct persmissions and add inetsim group.
-	os.system("tar xvf src/inetsim-1.2.2.tar.gz -C src/ && cd src/inetsim-1.2.2 && ./setup.sh")
 	os.system("groupadd inetsim")
+	os.system("tar xvf src/inetsim-1.2.2.tar.gz -C src/ && cd src/inetsim-1.2.2 && ./setup.sh")
 
 
 if args.setuptapinterface:
@@ -45,10 +45,10 @@ if args.setuptapinterface:
 if os.path.isfile("/etc/network/if-up.d/tap-cuckoo") != True:
                 f = open("/etc/network/if-up.d/tap-cuckoo", "w")
                 try:
-                        f.write("!#/bin/bash")
-                        f.write("tunctl -t %s" % (config.TAP_INTERFACE))
-                        f.write("ifconfig %s %s netmask %s" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
-                        f.write("route add -net %s netmask %s gw %s %s" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
+                        f.write("#!/bin/bash\n")
+                        f.write("tunctl -t %s\n" % (config.TAP_INTERFACE))
+                        f.write("ifconfig %s %s netmask %s\n" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
+                        f.write("route add -net %s netmask %s gw %s %s\n" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
                 finally:
                         f.close()
 			os.system("chmod +x /etc/network/if-up.d/tap-cuckoo")
