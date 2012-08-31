@@ -7,23 +7,50 @@ import argparse
 import os
 import config
 
+# you _really_ have to be root, else there is no point in starting the script
+# this could be a security issue but in most cases you are using this script on an isolated analysis box.
 
-# Enable ip forwarding
-os.system("echo 1 > /proc/sys/net/ipv4/ip_forward")
-print "IP Forwarding Enabled\n"
+if os.geteuid() != 0:
+    print "sorry, you need to run this as root"
+    sys.exit(1)
 
-# setup the tap/tun interface
-os.system("tunctl -t %s" % (config.TAP_INTERFACE))
-print "Created TAP interface %s\n" % (config.TAP_INTERFACE)
+parser = argparse.ArgumentParser("Cuckoo Sandbox Host preparation")
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument("-si", "--setupinetsim", help="Extract and prepare iNetsim", action="store_true", required=False)
+group.add_argument("-st", "--setuptapinterface", help="Setup the TAP interface and make it static in /etc/network/if-up.d for a reboot", action="store_true", required=False)
+args = parser.parse_args()
 
-# configure ip address tap/tun interface
-os.system("ifconfig %s %s netmask %s" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
-print "IP Address %s with netmask %s configured for %s\n" % (config.TAP_IP,config.TAP_NETMASK,config.TAP_INTERFACE)
 
-# create a route so it _could_ communicate with the outside world
-os.system("route add -net %s netmask %s gw %s %s" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
-print "Route added for subnet %s to gateway %s with IP %s\n" % (config.TAP_NETADDR,config.TAP_INTERFACE,config.TAP_IP)
+if args.setupinetsim:
+	# extract inetsim sources, run the inetsim setup script to correct persmissions and add inetsim group.
+	os.system("tar xvf src/inetsim-1.2.2.tar.gz -C src/ && cd src/inetsim-1.2.2 && ./setup.sh")
+	os.system("groupadd inetsim")
 
-# extract inetsim sources, run the inetsim setup script to correct persmissions and add inetsim group.
-os.system("tar xvf src/inetsim-1.2.2.tar.gz -C src/ && cd src/inetsim-1.2.2 && ./setup.sh")
-os.system("groupadd inetsim")
+
+if args.setuptapinterface:
+
+	os.system("tunctl -t %s" % (config.TAP_INTERFACE))
+	print "Created TAP interface %s\n" % (config.TAP_INTERFACE)
+
+	# configure ip address tap/tun interface
+	os.system("ifconfig %s %s netmask %s" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
+	print "IP Address %s with netmask %s configured for %s\n" % (config.TAP_IP,config.TAP_NETMASK,config.TAP_INTERFACE)
+
+	# create a route so it _could_ communicate with the outside world
+	os.system("route add -net %s netmask %s gw %s %s" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
+	print "Route added for subnet %s to gateway %s with IP %s\n" % (config.TAP_NETADDR,config.TAP_INTERFACE,config.TAP_IP)
+
+
+
+if os.path.isfile("/etc/network/if-up.d/tap-cuckoo") != True:
+                f = open("/etc/network/if-up.d/tap-cuckoo", "w")
+                try:
+                        f.write("!#/bin/bash")
+                        f.write("tunctl -t %s" % (config.TAP_INTERFACE))
+                        f.write("ifconfig %s %s netmask %s" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
+                        f.write("route add -net %s netmask %s gw %s %s" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
+                finally:
+                        f.close()
+			os.system("chmod +x /etc/network/if-up.d/tap-cuckoo")
+                        print "\n Making configuration static, /etc/network/if-up.d/tap-cuckoo written with the TAP configuration"
+ 
