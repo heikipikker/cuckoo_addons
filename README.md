@@ -12,7 +12,7 @@ To use this script you need to have:
 
 * Installation of the TOR package with a _DEFAULT_ configuration file. (`tor' needs to be in your $PATH)
 
-* A working installation of iNetsim from _SOURCE_, which is included in this script under src/ which will be extracted and configured when running prephost.py.
+* A working installation of iNetsim from _SOURCE_, which is included in this script under src/ which will be extracted and configured when running prephost.py -si.
 
 * A working installation of BIND, currently only works with the `named' binary(debian).
 
@@ -30,7 +30,7 @@ WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING P
 
 
 
- What you need to do after you run prephost.py:
+ What you need to do after you run prephost.py -si(setup inetsim) and prephost -st(setup TAP),:
 
 * enable IP forwarding: echo 1 > /proc/sys/net/ipv4/ip_forward 
 
