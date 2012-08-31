@@ -7,16 +7,16 @@ import os
 import time
 import config
 
-def Inetsim():
-	print "\n Starting iNetsim"
+def InetsimOn():
+	print "\n Starting iNetsim..."
+	os.system("iptables -t nat -A PREROUTING -i %s -j DNAT --to-destination %s" % (config.TAP_INTERFACE,config.TAP_IP))
 	os.system("cd src/inetsim-1.2.2 && ./inetsim --bind-address=%s --config=../../lib/inetsim.conf" % (config.TAP_IP))
-	
-	while True:
-		try:
-			time.sleep(2000)
 
-		except KeyboardInterrupt:	
-			print "Stopping iNetsim"
-			os.system("pkill inetsim")
-			sys.exit()
+def InetsimOff():	
+	print "\nStopping iNetsim..."
+	os.system("pkill inetsim")
+	print "\nFlushing iptables rules..."
+	os.system("iptables -F; iptables -t nat -F")
+	print "\nDone."
+	sys.exit()
 

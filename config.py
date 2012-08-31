@@ -3,7 +3,6 @@
 
 import os
 
-
 # name of your created tap interface, don't forget to bridge this with your VM's in Cuckoo
 TAP_INTERFACE="tap0"
 

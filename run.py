@@ -8,6 +8,7 @@ import config
 from lib import nat
 from lib import tor
 from lib import inetsim
+from lib import service
 
 
 # you _really_ have to be root, else there is no point in starting the script
@@ -28,13 +29,20 @@ args = parser.parse_args()
 
 # Call the Cuckoo Additions magic.
 if args.nat:	
-	nat.Nat()
+	nat.NatOn()
+	service.Service()
+	nat.NatOff()
 
 if args.tor:
-	tor.Tor()
+	tor.TorOn()
+	service.Service()
+	tor.TorOff()
+	
 
 if args.inetsim:
-	inetsim.Inetsim()	
+	inetsim.InetsimOn()	
+	service.Service()
+	inetsim.InetsimOff()
 
 if args.flushiptables:
 	os.system("iptables -t nat -F; iptables -F")
