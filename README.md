@@ -28,7 +28,9 @@ To use this script you need to have:
 
 
 WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING PREPHOST.PY
+
 WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING PREPHOST.PY
+
 WARNING: ALWAYS PROPERLY CONFIGURE the config.py FILE BEFORE YOU START RUNNING PREPHOST.PY
 if you don't, you'll probably end up with broken network configuration.
 
