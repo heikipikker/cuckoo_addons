@@ -22,6 +22,7 @@ args = parser.parse_args()
 
 
 if args.setupinetsim:
+
 	# extract inetsim sources, run the inetsim setup script to correct persmissions and add inetsim group.
 	os.system("groupadd inetsim")
 	os.system("tar xvf src/inetsim-1.2.2.tar.gz -C src/ && cd src/inetsim-1.2.2 && ./setup.sh")
