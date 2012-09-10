@@ -18,7 +18,12 @@ parser = argparse.ArgumentParser("Cuckoo Sandbox Host preparation")
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-si", "--setupinetsim", help="Extract and prepare iNetsim", action="store_true", required=False)
 group.add_argument("-st", "--setuptapinterface", help="Setup the TAP interface and make it static in /etc/network/if-up.d for a reboot", action="store_true", required=False)
+group.add_argument("-it", "--installtor", help="Install TOR package", action="store_true", required=False)
 args = parser.parse_args()
+
+
+if args.installtor:
+	os.system("apt-get install tor")
 
 
 if args.setupinetsim:
@@ -43,15 +48,15 @@ if args.setuptapinterface:
 
 
 
-if os.path.isfile("/etc/network/if-up.d/tap-cuckoo") != True:
-                f = open("/etc/network/if-up.d/tap-cuckoo", "w")
-                try:
-                        f.write("#!/bin/bash\n")
-                        f.write("tunctl -t %s\n" % (config.TAP_INTERFACE))
-                        f.write("ifconfig %s %s netmask %s\n" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
-                        f.write("route add -net %s netmask %s gw %s %s\n" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
-                finally:
-                        f.close()
-			os.system("chmod +x /etc/network/if-up.d/tap-cuckoo")
-                        print "\n Making configuration static, /etc/network/if-up.d/tap-cuckoo written with the TAP configuration"
+	if os.path.isfile("/etc/network/if-up.d/tap-cuckoo") != True:
+        	        f = open("/etc/network/if-up.d/tap-cuckoo", "w")
+                	try:
+                        	f.write("#!/bin/bash\n")
+                        	f.write("tunctl -t %s\n" % (config.TAP_INTERFACE))
+                        	f.write("ifconfig %s %s netmask %s\n" % (config.TAP_INTERFACE,config.TAP_IP,config.TAP_NETMASK))
+                        	f.write("route add -net %s netmask %s gw %s %s\n" % (config.TAP_NETADDR,config.TAP_NETMASK,config.TAP_IP,config.TAP_INTERFACE))
+                	finally:
+                        	f.close()
+				os.system("chmod +x /etc/network/if-up.d/tap-cuckoo")
+                        	print "\n Making configuration static, /etc/network/if-up.d/tap-cuckoo written with the TAP configuration"
  
