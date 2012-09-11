@@ -24,10 +24,19 @@ args = parser.parse_args()
 if args.installdependencies:
         print "Installing TOR, uml-utilities, Perl dependencies and bind9 DNS server.."
         os.system("apt-get install tor uml-utilities bind9 perl perl-base perl-modules libnet-server-perl libnet-dns-perl libipc-shareable-perl libdigest-sha1-perl libio-socket-ssl-perl libiptables-ipv4-ipqueue-perl")
+
+	print "Disabling BIND9 to automatically start at boot.."
+	os.system("update-rc.d bind9 disable")
+
+	print "Disabling TOR to automatically start at boot.."
+	os.system("update-rc.d tor disable")
+
 #        print "Installing Net::DNS cpan module"
 #        os.system("cpan -i Net::DNS")
-        print "\n\nInstalled the TOR package, uml-utilities and Perl dependencies for iNetsim.."
-	print "If you encouter problems running iNetsim please statisfy the Perl dependencies manually trough CPAN."
+#        os.system("cpan -i Digest::SHA1")
+
+	print "\n\nDone."
+	print "If you encounter problems running iNetsim please statisfy the Perl dependencies manually through CPAN.."
 	
 
 if args.setupinetsim:
