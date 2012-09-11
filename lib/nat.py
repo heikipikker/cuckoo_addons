@@ -16,6 +16,8 @@ def NatOn():
 	os.system("iptables -A FORWARD -i %s -o %s -j ACCEPT" % (config.TAP_INTERFACE,config.INTERNET_INTERFACE))
 	os.system("iptables -t nat -A POSTROUTING -o %s -j MASQUERADE" % (config.INTERNET_INTERFACE))	
 	time.sleep(1)
+	print "Enabled IP forwarding..."
+	os.system("sysctl -w net.ipv4.ip_forward=1")
 	print "\nDone, NAT running from %s to the internet." % (config.INTERNET_INTERFACE)
 
 
@@ -26,4 +28,6 @@ def NatOff():
 	print "\nFlushing iptables..."
 	os.system("iptables -F; iptables -t nat -F")
 	time.sleep(1)
+	print "Disabled IP forwarding..."
+	os.system("sysctl -w net.ipv4.ip_forward=0")
 	print "\nDone."
