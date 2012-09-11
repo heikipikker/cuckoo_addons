@@ -23,7 +23,7 @@ group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-t", "--tor", help="Enable TOR Transparant Proxy", action="store_true", required=False)
 group.add_argument("-i", "--inetsim", help="Enable iNetsim", action="store_true", required=False)
 group.add_argument("-n", "--nat", help="Enable NAT", action="store_true", required=False)
-group.add_argument("-F", "--flushiptables", help="This command is for flushing iptables, in case something goes wrong", action="store_true", required=False)
+group.add_argument("-F", "--reset", help="This command is for flushing iptables and disabling IP forwarding, in case something goes wrong", action="store_true", required=False)
 args = parser.parse_args()
 
 
@@ -44,5 +44,8 @@ if args.inetsim:
 	service.Service()
 	inetsim.InetsimOff()
 
-if args.flushiptables:
+if args.reset:
+	print "Flushing IP tables.."
 	os.system("iptables -t nat -F; iptables -F")
+	print "Disabling IP forwarding..."
+	os.system("sysctl -w net.ipv4.ip_forward=0")

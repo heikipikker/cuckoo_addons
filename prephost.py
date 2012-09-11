@@ -21,13 +21,14 @@ group.add_argument("-st", "--setuptapinterface", help="Setup the TAP interface a
 group.add_argument("-id", "--installdependencies", help="Install TOR all the dependencies", action="store_true", required=False)
 args = parser.parse_args()
 
-if args.dependencies:
-        print "Installing TOR, uml-utilities and bind9 dns server.."
-        os.system("apt-get install tor uml-utilities bind9")
-        print "Installing Net::DNS cpanmodule"
-        os.system("cpan Net::DNS")
-        print "Installed the TOR package, uml-utilities and Perl module Net::DNS..."
-
+if args.installdependencies:
+        print "Installing TOR, uml-utilities, Perl dependencies and bind9 DNS server.."
+        os.system("apt-get install tor uml-utilities bind9 perl perl-base perl-modules libnet-server-perl libnet-dns-perl libipc-shareable-perl libdigest-sha1-perl libio-socket-ssl-perl libiptables-ipv4-ipqueue-perl")
+#        print "Installing Net::DNS cpan module"
+#        os.system("cpan -i Net::DNS")
+        print "\n\nInstalled the TOR package, uml-utilities and Perl dependencies for iNetsim.."
+	print "If you encouter problems running iNetsim please statisfy the Perl dependencies manually trough CPAN."
+	
 
 if args.setupinetsim:
 
