@@ -18,17 +18,15 @@ parser = argparse.ArgumentParser("Cuckoo Sandbox Host preparation")
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-si", "--setupinetsim", help="Extract and prepare iNetsim", action="store_true", required=False)
 group.add_argument("-st", "--setuptapinterface", help="Setup the TAP interface and make it static in /etc/network/if-up.d for a reboot", action="store_true", required=False)
-group.add_argument("-id", "--installdependancies", help="Install TOR all the dependancies", action="store_true", required=False)
+group.add_argument("-id", "--installdependencies", help="Install TOR all the dependencies", action="store_true", required=False)
 args = parser.parse_args()
 
-if args.dependancies:
+if args.dependencies:
         print "Installing TOR, uml-utilities and bind9 dns server.."
         os.system("apt-get install tor uml-utilities bind9")
         print "Installing Net::DNS cpanmodule"
         os.system("cpan Net::DNS")
         print "Installed the TOR package, uml-utilities and Perl module Net::DNS..."
-
-
 
 
 if args.setupinetsim:

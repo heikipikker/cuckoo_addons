@@ -36,7 +36,7 @@ if you don't, you'll probably end up with broken network configuration.
 
 
 
- What you need to do after you run prephost.py -si(setup inetsim) and prephost -st(setup TAP),:
+ What you need to do after you run prephost.py -si(setup inetsim), prephost -st(setup TAP) and -sd(setup dependencies:
 
 * enable IP forwarding: echo 1 > /proc/sys/net/ipv4/ip_forward 
 
