@@ -18,17 +18,19 @@ def NatOn():
 	time.sleep(1)
 	print "Enabled IP forwarding..."
 	os.system("sysctl -w net.ipv4.ip_forward=1")
+	time.sleep(1)
 	print "\nDone, NAT running from %s to the internet." % (config.INTERNET_INTERFACE)
-	print "\nReady!"
 
 
 def NatOff():
 
 	print "\nStopping BIND DNS server..."
 	os.system("pkill named")
+	time.sleep(1)
 	print "\nFlushing iptables..."
 	os.system("iptables -F; iptables -t nat -F")
 	time.sleep(1)
 	print "Disabled IP forwarding..."
 	os.system("sysctl -w net.ipv4.ip_forward=0")
+	time.sleep(1)
 	print "\nDone."

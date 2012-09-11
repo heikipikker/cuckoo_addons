@@ -16,21 +16,21 @@ def TorOn():
 	os.system("iptables -A FORWARD -i %s -p tcp -m tcp -j DROP" % (config.TAP_INTERFACE))
 	os.system("iptables -t nat -A PREROUTING -i %s -p udp -m udp --dport 53 -j REDIRECT --to-ports 53" % (config.TAP_INTERFACE))
 	os.system("iptables -t nat -A PREROUTING -i %s -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports 9040" % (config.TAP_INTERFACE))
-	time.sleep(1)
-	print "Enabled IP forwarding..."
-	os.system("sysctl -w net.ipv4.ip_forward=1")
+#	time.sleep(1)
+#	print "Enabled IP forwarding..."
+#	os.system("sysctl -w net.ipv4.ip_forward=1")
 	time.sleep(1)
 	print "TOR Transparant Proxy listening, all traffic from %s is being forwarded to the TOR network..." % (config.TAP_INTERFACE)	
-	print "\nReady!"
 
 def TorOff():
 	print "\nStopping TOR Transparant Proxy..."
 	os.system("pkill tor")
 	time.sleep(1)
 	print "\nFlushing iptables rules..."
-	time.sleep(1)
 	os.system("iptables -t nat -F; iptables -F")
-	print "Disabled IP forwarding\n"
-	os.system("sysctl -w net.ipv4.ip_forward=0")
+	time.sleep(1)
+#	print "Disabled IP forwarding\n"
+#	os.system("sysctl -w net.ipv4.ip_forward=0")
+#	time.sleep(1)
 	print "\nDone."
 	sys.exit()
