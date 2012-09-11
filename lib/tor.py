@@ -20,7 +20,8 @@ def TorOn():
 	print "Enabled IP forwarding..."
 	os.system("sysctl -w net.ipv4.ip_forward=1")
 	time.sleep(1)
-	print "TOR Transparant Proxy listening, all traffic from %s is being forwarded to the TOR network..." % (config.TAP_INTERFACE)
+	print "TOR Transparant Proxy listening, all traffic from %s is being forwarded to the TOR network..." % (config.TAP_INTERFACE)	
+	print "\nReady!"
 
 def TorOff():
 	print "\nStopping TOR Transparant Proxy..."

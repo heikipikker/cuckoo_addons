@@ -19,6 +19,7 @@ def NatOn():
 	print "Enabled IP forwarding..."
 	os.system("sysctl -w net.ipv4.ip_forward=1")
 	print "\nDone, NAT running from %s to the internet." % (config.INTERNET_INTERFACE)
+	print "\nReady!"
 
 
 def NatOff():
