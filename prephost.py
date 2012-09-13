@@ -28,16 +28,17 @@ import config
 # you _really_ have to be root, else there is no point in starting the script
 # this could be a security issue but in most cases you are using this script on an isolated analysis box.
 
-if os.geteuid() != 0:
-    print "sorry, you need to run this as root"
-    sys.exit(1)
-
 parser = argparse.ArgumentParser("Cuckoo Sandbox Host preparation")
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-si", "--setupinetsim", help="Extract and prepare iNetsim", action="store_true", required=False)
 group.add_argument("-st", "--setuptapinterface", help="Setup the TAP interface and make it static in /etc/network/if-up.d for a reboot", action="store_true", required=False)
 group.add_argument("-id", "--installdependencies", help="Install TOR all the dependencies", action="store_true", required=False)
 args = parser.parse_args()
+
+if os.geteuid() != 0:
+    print "sorry, you need to run this as root"
+    sys.exit(1)
+
 
 if args.installdependencies:
         print "Installing TOR, uml-utilities, Perl dependencies and bind9 DNS server.."

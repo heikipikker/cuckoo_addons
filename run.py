@@ -30,13 +30,6 @@ from lib import inetsim
 from lib import service
 
 
-# you _really_ have to be root, else there is no point in starting the script
-# this could be a security issue but in most cases you are using this script on an isolated analysis box.
-
-if os.geteuid() != 0:
-    print "sorry, you need to run this as root"
-    sys.exit(1)
-
 parser = argparse.ArgumentParser("Cuckoo Sandbox Addons")
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-t", "--tor", help="Enable TOR Transparant Proxy", action="store_true", required=False)
@@ -44,6 +37,13 @@ group.add_argument("-i", "--inetsim", help="Enable iNetsim", action="store_true"
 group.add_argument("-n", "--nat", help="Enable NAT", action="store_true", required=False)
 group.add_argument("-R", "--reset", help="This command is for flushing iptables and disabling IP forwarding, in case something goes wrong", action="store_true", required=False)
 args = parser.parse_args()
+
+# you _really_ have to be root, else there is no point in starting the script
+# this could be a security issue but in most cases you are using this script on an isolated analysis box.
+
+if os.geteuid() != 0:
+    print "sorry, you need to run this as root"
+    sys.exit(1)
 
 
 # Call the Cuckoo Addons magic.
