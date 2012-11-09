@@ -31,4 +31,3 @@ TAP_NETMASK="255.255.0.0"
 
 # you're internet interface
 INTERNET_INTERFACE="eth0"
-
