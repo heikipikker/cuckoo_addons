@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Serge van Namen serge ? se-cured d0t org
+# Copyright (C) 2012  Serge van Namen serge@se-cured.org
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
