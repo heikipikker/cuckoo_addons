@@ -29,10 +29,6 @@ from lib import tor
 from lib import inetsim
 from lib import service
 
-if platform.uname() != "debian":
-    print "This script only runs on Debian (based) linux distributions."
-    quit()
-
 parser = argparse.ArgumentParser("Cuckoo Sandbox Addons")
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-t", "--tor", help="Enable TOR Transparant Proxy", action="store_true", required=False)

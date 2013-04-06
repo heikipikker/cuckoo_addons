@@ -26,11 +26,6 @@ import os
 import platform
 import config
 
-
-if platform.uname() != "debian":
-    print "This script only runs on Debian (based) linux distributions."
-    quit()
-
 # you _really_ have to be root, else there is no point in starting the script
 # this could be a security issue but in most cases you are using this script on an isolated analysis box.
 
